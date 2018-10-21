@@ -1,4 +1,4 @@
-import SettingsModal from '../SettingsModal';
+import SettingsModal from '../settings/SettingsModal';
 import { types } from '../settings/items';
 
 const defaults = (obj, ...defs) =>
