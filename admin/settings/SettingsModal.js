@@ -33,7 +33,7 @@ export default class SettingsModal extends FlarumSettingsModal {
                     (!c.attrs ||
                         !c.attrs.className ||
                         !c.attrs.className.contains('Form-group')) ? (
-                        <div className="Form-group">{c}</div>
+                            m('div.Form-group', c)
                     ) : (
                         c
                     )
@@ -68,17 +68,17 @@ export default class SettingsModal extends FlarumSettingsModal {
                 ];
 
             items.push(
-                <div className={`Form-group ${isRequired ? 'required' : ''}`}>
-                    {type !== 'boolean' && <label>{label}</label>}
-                    {item.component({
+                m.prop(`div.Form-group${isRequired ? '.required' : ''}`, [
+                    type !== 'boolean' && m('label', label),
+                    item.component({
                         type,
                         key: fullKey,
                         required: isRequired,
                         children: label,
                         simple: true,
-                    })}
-                    {description && <span>{description}</span>}
-                </div>
+                    }),
+                    description && m('span', description)
+                ])
             );
         }
 

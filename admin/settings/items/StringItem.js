@@ -1,4 +1,5 @@
-import SettingItem from './SettingItem';
+// import SettingItem from './SettingItem';
+const SettingItem = require('./SettingItem');
 
 export default class StringItem extends SettingItem {
     view() {
@@ -14,10 +15,10 @@ export default class StringItem extends SettingItem {
         return attrs.simple ? (
             m('input', attrs)
         ) : (
-            <div className="Form-group">
-                {label && <label>{label}</label>}
-                {m('input', attrs)}
-            </div>
+            m('div.Form-group', [
+                m('label', label),
+                m('input', attrs)
+            ])
         );
     }
 }
