@@ -1,5 +1,4 @@
-// import SettingItem from './SettingItem';
-const SettingItem = require('./SettingItem');
+import SettingItem from './SettingItem';
 
 export default class StringItem extends SettingItem {
     view() {
