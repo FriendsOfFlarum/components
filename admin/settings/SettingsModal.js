@@ -3,7 +3,7 @@ import { StringItem, types } from '../settings/items';
 
 export default class SettingsModal extends FlarumSettingsModal {
     init() {
-        this.props.items = Array.from(this.props.items);
+        this.props.items = Array.from(this.props.items || []);
         this.settings = {};
         this.setting = this.setting.bind(this);
 
