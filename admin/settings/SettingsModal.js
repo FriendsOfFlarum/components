@@ -32,11 +32,9 @@ export default class SettingsModal extends FlarumSettingsModal {
                     c.tag !== 'div' &&
                     (!c.attrs ||
                         !c.attrs.className ||
-                        !c.attrs.className.contains('Form-group')) ? (
-                            m('div.Form-group', c)
-                    ) : (
-                        c
-                    )
+                        !c.attrs.className.contains('Form-group'))
+                        ? m('div.Form-group', c)
+                        : c
             )
         );
     }
@@ -77,7 +75,7 @@ export default class SettingsModal extends FlarumSettingsModal {
                         children: label,
                         simple: true,
                     }),
-                    description && m('span', description)
+                    description && m('span', description),
                 ])
             );
         }
