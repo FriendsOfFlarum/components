@@ -17,7 +17,7 @@ export default class GroupSearchSource {
         if (!results.length) return '';
 
         return [
-            <li className="Dropdown-header">{app.translator.trans('flagrow-byobu.forum.search.headings.groups')}</li>,
+            <li className="Dropdown-header">{app.translator.trans('core.forum.edit_user.groups_heading')}</li>,
             results.map(group => {
                 const groupName = group.namePlural();
                 const name = highlight(groupName, query);
