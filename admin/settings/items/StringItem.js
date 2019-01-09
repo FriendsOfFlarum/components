@@ -9,8 +9,6 @@ export default class StringItem extends SettingItem {
         attrs.value = this.getValue();
         attrs.onchange = attrs.onchange || m.withAttr('value', this.setting());
 
-        console.log(attrs);
-
         return attrs.simple
             ? m('input', attrs)
             : m('div.Form-group', [m('label', label), m('input', attrs)]);
