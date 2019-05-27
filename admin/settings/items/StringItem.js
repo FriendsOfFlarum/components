@@ -6,8 +6,7 @@ export default class StringItem extends SettingItem {
         const label = this.props.label || this.props.children;
 
         attrs.className = 'FormControl ' + (attrs.className || '');
-        attrs.value = this.getValue();
-        attrs.onchange = attrs.onchange || m.withAttr('value', this.setting());
+        attrs.bidi = this.setting();
 
         return attrs.simple
             ? m('input', attrs)
