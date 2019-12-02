@@ -8,8 +8,6 @@ export default class StringItem extends SettingItem {
         attrs.className = 'FormControl ' + (attrs.className || '');
         attrs.bidi = this.setting();
 
-        return attrs.simple
-            ? m('input', attrs)
-            : m('div.Form-group', [m('label', label), m('input', attrs)]);
+        return attrs.simple ? m('input', attrs) : m('div.Form-group', [m('label', label), m('input', attrs)]);
     }
 }

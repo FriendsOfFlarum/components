@@ -11,12 +11,7 @@ export default class SettingsModal extends FlarumSettingsModal {
     }
 
     className() {
-        return [
-            this.props.className,
-            this.props.size && `Modal--${this.props.size}`,
-        ]
-            .filter(Boolean)
-            .join(' ');
+        return [this.props.className, this.props.size && `Modal--${this.props.size}`].filter(Boolean).join(' ');
     }
 
     title() {
@@ -26,24 +21,13 @@ export default class SettingsModal extends FlarumSettingsModal {
     form() {
         return (
             this.props.form ||
-            [...this.props.items].map(
-                c =>
-                    c &&
-                    c.tag !== 'div' &&
-                    (!c.attrs ||
-                        !c.attrs.className ||
-                        !c.attrs.className.contains('Form-group'))
-                        ? m('div.Form-group', c)
-                        : c
+            [...this.props.items].map(c =>
+                c && c.tag !== 'div' && (!c.attrs || !c.attrs.className || !c.attrs.className.contains('Form-group')) ? m('div.Form-group', c) : c
             )
         );
     }
 
-    static createItemsFromValidationRules(
-        rules,
-        settingsPrefix,
-        translationsPrefix
-    ) {
+    static createItemsFromValidationRules(rules, settingsPrefix, translationsPrefix) {
         const items = [];
 
         for (const key in rules) {
@@ -53,17 +37,8 @@ export default class SettingsModal extends FlarumSettingsModal {
             const item = (type && types[type]) || StringItem;
 
             const isRequired = rulez.includes('required');
-            const label =
-                (translationsPrefix &&
-                    (app.translator.trans[
-                        `${translationsPrefix}${key.toLowerCase()}-label`
-                    ] ||
-                        key)) ||
-                key;
-            const description =
-                app.translator.translations[
-                    `${translationsPrefix}${key.toLowerCase()}-description`
-                ];
+            const label = (translationsPrefix && (app.translator.trans[`${translationsPrefix}${key.toLowerCase()}-label`] || key)) || key;
+            const description = app.translator.translations[`${translationsPrefix}${key.toLowerCase()}-description`];
 
             items.push(
                 m.prop(`div.Form-group${isRequired ? '.required' : ''}`, [

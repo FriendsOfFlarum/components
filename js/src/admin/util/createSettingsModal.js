@@ -1,8 +1,7 @@
 import SettingsModal from '../settings/SettingsModal';
 import { types } from '../settings/items';
 
-const defaults = (obj, ...defs) =>
-    Object.assign({}, obj, ...defs.reverse(), obj);
+const defaults = (obj, ...defs) => Object.assign({}, obj, ...defs.reverse(), obj);
 const get = (from, ...selectors) =>
     [...selectors].map(s =>
         s
@@ -39,14 +38,7 @@ export default opts => {
 
     return new SettingsModal(
         defaults(opts, {
-            title:
-                title ||
-                (id &&
-                    get(
-                        app.data.extensions[id],
-                        'extra[flarum-extension].title'
-                    )[0]) ||
-                id,
+            title: title || (id && get(app.data.extensions[id], 'extra[flarum-extension].title')[0]) || id,
             items: [
                 settings.map(key => {
                     const value = cast(app.data.settings[key]);
