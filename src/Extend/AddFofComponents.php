@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of fof/components.
+ *
+ * Copyright (c) 2019 FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\Components\Extend;
 
 use Flarum\Extend\ExtenderInterface;
-use Flarum\Extend\Frontend;
 use Flarum\Extension\Extension;
 use Flarum\Frontend\Assets;
 use Flarum\Frontend\Compiler\Source\SourceCollector;
