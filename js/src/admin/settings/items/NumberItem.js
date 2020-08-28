@@ -1,10 +1,10 @@
 import StringItem from './StringItem';
 
 export default class IntegerItem extends StringItem {
-    init() {
-        StringItem.prototype.init.call(this);
+    oninit(vnode) {
+        super.oninit(vnode);
 
-        this.cast = a => Number(a);
-        this.props.type = 'number';
+        this.cast = (a) => Number(a);
+        this.attrs.type = 'number';
     }
 }

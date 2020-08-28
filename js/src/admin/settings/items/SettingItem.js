@@ -1,13 +1,20 @@
 import Component from 'flarum/Component';
 
 export default class SettingItem extends Component {
-    init() {
-        this.key = this.props.key;
-        this.cast = this.props.cast || (a => a);
+    oninit(vnode) {
+        super.oninit(vnode);
+
+        this.cast = this.attrs.cast || ((a) => a);
+
+        if (typeof this.attrs.setting !== 'function') {
+            throw new Error(
+                '[fof/components] SettingsModal - "setting" attribute must be a function, more specifically the SettingsModal setting() method passed to the modal\'s items attribute.'
+            );
+        }
     }
 
     setting() {
-        return app.modal.component.setting(this.key);
+        return this.attrs.setting(this.attrs.name);
     }
 
     getValue() {

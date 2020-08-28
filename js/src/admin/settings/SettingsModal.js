@@ -1,60 +1,36 @@
 import FlarumSettingsModal from 'flarum/components/SettingsModal';
-import { StringItem, types } from '../settings/items';
+import classList from 'flarum/utils/classList';
 
 export default class SettingsModal extends FlarumSettingsModal {
-    init() {
-        this.props.items = Array.from(this.props.items || []);
+    oninit(vnode) {
+        super.oninit(vnode);
+
         this.settings = {};
         this.setting = this.setting.bind(this);
 
-        if (this.props.onsaved) this.onsaved = this.props.onsaved.bind(this);
+        if (this.attrs.onsaved) this.onsaved = this.attrs.onsaved.bind(this);
+
+        if (this.attrs.items && typeof this.attrs.items !== 'function') {
+            throw new Error(
+                '[fof/components] SettingsModal - "items" attribute must be a function that accepts the setting() method to pass to all SettingItem children.'
+            );
+        }
     }
 
     className() {
-        return [this.props.className, this.props.size && `Modal--${this.props.size}`].filter(Boolean).join(' ');
+        return classList([this.attrs.className, this.attrs.size && `Modal--${this.attrs.size}`]);
     }
 
     title() {
-        return this.props.title;
+        return this.attrs.title;
     }
 
     form() {
         return (
-            this.props.form ||
-            [...this.props.items].map(c =>
+            this.attrs.form ||
+            [...this.attrs.items(this.setting)].map((c) =>
                 c && c.tag !== 'div' && (!c.attrs || !c.attrs.className || !c.attrs.className.contains('Form-group')) ? m('div.Form-group', c) : c
             )
         );
-    }
-
-    static createItemsFromValidationRules(rules, settingsPrefix, translationsPrefix) {
-        const items = [];
-
-        for (const key in rules) {
-            const fullKey = settingsPrefix + key.toLowerCase();
-            const rulez = rules[key].split('|');
-            const type = rulez.find(t => types[t]) || 'string';
-            const item = (type && types[type]) || StringItem;
-
-            const isRequired = rulez.includes('required');
-            const label = (translationsPrefix && (app.translator.trans[`${translationsPrefix}${key.toLowerCase()}-label`] || key)) || key;
-            const description = app.translator.translations[`${translationsPrefix}${key.toLowerCase()}-description`];
-
-            items.push(
-                m.prop(`div.Form-group${isRequired ? '.required' : ''}`, [
-                    type !== 'boolean' && m('label', label),
-                    item.component({
-                        type,
-                        key: fullKey,
-                        required: isRequired,
-                        children: label,
-                        simple: true,
-                    }),
-                    description && m('span', description),
-                ])
-            );
-        }
-
-        return items;
     }
 }

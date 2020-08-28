@@ -3,11 +3,11 @@ import { types } from '../settings/items';
 
 const defaults = (obj, ...defs) => Object.assign({}, obj, ...defs.reverse(), obj);
 const get = (from, ...selectors) =>
-    [...selectors].map(s =>
+    [...selectors].map((s) =>
         s
             .replace(/\[([^\[\]]*)\]/g, '.$1.')
             .split('.')
-            .filter(t => t !== '')
+            .filter((t) => t !== '')
             .reduce((prev, cur) => prev && prev[cur], from)
     );
 
@@ -32,15 +32,15 @@ const get = (from, ...selectors) =>
 
 })
  */
-export default opts => {
+export default (opts) => {
     const { id, settings, title } = opts;
-    const cast = opts.cast || (a => a);
+    const cast = opts.cast || ((a) => a);
 
     return new SettingsModal(
         defaults(opts, {
             title: title || (id && get(app.data.extensions[id], 'extra[flarum-extension].title')[0]) || id,
             items: [
-                settings.map(key => {
+                settings.map((key) => {
                     const value = cast(app.data.settings[key]);
                     const type = typeof value;
                     const item = types[type];

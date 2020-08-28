@@ -1,9 +1,9 @@
 import SettingItem from './SettingItem';
 
 export default class StringItem extends SettingItem {
-    view() {
-        const attrs = Object.assign({}, this.props);
-        const label = this.props.label || this.props.children;
+    view(vnode) {
+        const attrs = Object.assign({}, this.attrs);
+        const label = this.attrs.label || vnode.children;
 
         attrs.className = 'FormControl ' + (attrs.className || '');
         attrs.bidi = this.setting();

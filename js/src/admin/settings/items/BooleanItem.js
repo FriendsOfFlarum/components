@@ -2,11 +2,16 @@ import Switch from 'flarum/components/Switch';
 import SettingItem from './SettingItem';
 
 export default class BooleanItem extends SettingItem {
-    view() {
-        return Switch.component({
-            state: !!Number(this.getValue()),
-            children: this.props.label || this.props.children,
-            onchange: this.setting(),
-        });
+    oninit(vnode) {
+        super.oninit(vnode);
+
+        this.cast = (v) => !!Number(v);
+    }
+    view(vnode) {
+        return (
+            <Switch state={this.getValue()} onchange={this.setting()}>
+                {this.attrs.label || vnode.children}
+            </Switch>
+        );
     }
 }
