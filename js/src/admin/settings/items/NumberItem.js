@@ -5,6 +5,9 @@ export default class IntegerItem extends StringItem {
         super.oninit(vnode);
 
         this.cast = (a) => Number(a);
-        this.attrs.type = 'number';
+    }
+
+    static initAttrs(attrs) {
+        attrs.type = 'number';
     }
 }
