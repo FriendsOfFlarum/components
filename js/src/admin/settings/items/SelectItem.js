@@ -6,7 +6,7 @@ export default class SelectItem extends SettingItem {
         return Select.component({
             options: this.attrs.options,
             value: this.getValue() || this.attrs.default,
-            bidi: this.setting(),
+            onchange: this.setting(),
         });
     }
 }
